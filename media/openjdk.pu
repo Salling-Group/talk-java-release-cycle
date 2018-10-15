@@ -1,0 +1,41 @@
+@startuml
+
+frame Source {
+artifact repo as "openjdk.hg"
+}
+
+frame Builds {
+artifact others as "..."
+
+frame Oracle {
+artifact ojdk as "Oracle JDK"
+artifact oojdk as "Oracle OpenJDK"
+}
+
+artifact ajdk as "Azul Zulu"
+artifact aojdk as "AdoptOpenJDK"
+}
+
+frame "Technology Compatibility Kit" {
+card tck as ""Java SE compatible""
+}
+
+repo --> ojdk
+repo --> oojdk
+repo --> ajdk
+repo --> aojdk
+repo --> others
+
+ojdk   ..> tck
+oojdk  ..> tck
+ajdk   ..> tck
+aojdk  ..> tck
+others ..> tck
+
+tck ..> aojdk
+tck ..> ajdk
+tck ..> ojdk
+tck ..> oojdk
+tck ..> others
+
+@enduml

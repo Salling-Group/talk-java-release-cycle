@@ -60,6 +60,9 @@ LATEXMK := latexmk $(if $(xelatex),-xelatex,-pdflatex="pdflatex %O %S") \
 
 ## ---- build rules ----
 
+plantuml_diagrams_pu := $(wildcard media/*.pu)
+plantuml_diagrams_png := $(plantuml_diagrams_pu:.pu=.png)
+
 notes_md := $(wildcard $(NOTES)/*.md)
 
 notes_tex := $(patsubst $(NOTES)/%.md,lectures/%.tex,$(notes_md))
@@ -96,6 +99,10 @@ $(handouts_notes_tex): handouts/%.tex: $(NOTES)/%.md
 	    -V scuro="" \
 	    -o $@ $<
 
+media/%.png: media/%.pu
+	java -jar plantuml.jar -tpng $<
+	optipng $@
+
 phony_pdfs := $(if $(always_latexmk),$(pdfs) $(notes_pdf))
 
 # phony targets to make all three PDFS for a single source
@@ -117,7 +124,7 @@ $(notes_pdf): %.pdf: %.tex
 	pdfjam --nup 2x2 --landscape $(dir $@)$(temp_dir)/$(notdir $@) -o $@
 	rm -r $(dir $@)$(temp_dir)
 
-all: $(pdfs) $(notes_pdf)
+all: $(plantuml_diagrams_png) $(pdfs) $(notes_pdf)
 
 # clean up everything except final pdfs
 clean:
