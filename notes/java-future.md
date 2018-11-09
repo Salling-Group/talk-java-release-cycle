@@ -52,41 +52,6 @@ links-as-notes: true
     - Better understanding of impact of new strategy
     - Expected biggest obstacle: third-party dependencies (i.e. not JDK or JVM)
 
-# Recommendations\
-for next 18 months
-
-## Developers
-
-- Use distro\footnote{If not an option, use AdoptOpenJDK} OpenJDK
-- Build on JDK._LTS_\footnote{Expect to be stuck on Java 8 for a while}
-- Test build on
-    - JDK._LTS_
-    - JDK._stable_
-    - JDK._next_\footnote{\textit{Super} important}\footnote{Also really easy
-      in Travis CI}
-
-## Operations
-
-- Provide JDK._LTS_, JDK._stable_, **and** JDK._next_
-    - Use distro\footnote{If not an option, use AdoptOpenJDK} OpenJDK
-    - For _future option_ of paid support, use Azul Zulu
-- Use JDK._LTS_ in production\footnote{We still have to keep it updated}
-    - Consider shift to per-application JDK\footnote{This may happen
-      automatically as LTO becomes common}
-
-## Avoid
-
-- Oracle JDK in production --- requires license and we don't use commercial
-  support today anyway\footnote{Not because we shouldn't pay but because we
-  don't use what we'd be paying for}
-- Oracle JDK 8 in development --- legal but pointless
-- Oracle OpenJDK 8 in development --- legal but pointless
-- Oracle OpenJDK in production --- legal but irresponsible
-- Neglecting JDK in production
-- Relying on `--release=<platform JDK>`\footnote{We still need to specify it}
-  --- too superficial guarantees
-- JDK._stable_ in production --- third-party dependencies could trip us up
-
 # New release strategy
 
 ## Versioning
@@ -156,6 +121,41 @@ for next 18 months
 ## Others
 
 - Basically same story
+
+# Recommendations\
+for next 18 months
+
+## Developers
+
+- Use distro\footnote{If not an option, use AdoptOpenJDK} OpenJDK
+- Build on JDK._LTS_\footnote{Expect to be stuck on Java 8 for a while}
+- Test build on
+    - JDK._LTS_
+    - JDK._stable_
+    - JDK._next_\footnote{\textit{Super} important}\footnote{Also really easy
+      in Travis CI}
+
+## Operations
+
+- Provide JDK._LTS_, JDK._stable_, **and** JDK._next_
+    - Use distro\footnote{If not an option, use AdoptOpenJDK} OpenJDK
+    - For _future option_ of paid support, use Azul Zulu
+- Use JDK._LTS_ in production\footnote{We still have to keep it updated}
+    - Consider shift to per-application JDK\footnote{This may happen
+      automatically as LTO becomes common}
+
+## Avoid
+
+- Oracle JDK in production --- requires license and we don't use commercial
+  support today anyway\footnote{Not because we shouldn't pay but because we
+  don't use what we'd be paying for}
+- Oracle JDK 8 in development --- legal but pointless
+- Oracle OpenJDK 8 in development --- legal but pointless
+- Oracle OpenJDK in production --- legal but irresponsible
+- Neglecting JDK in production
+- Relying on `--release=<platform JDK>`\footnote{We still need to specify it}
+  --- too superficial guarantees
+- JDK._stable_ in production --- third-party dependencies could trip us up
 
 # _Or else..._
 
